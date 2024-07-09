@@ -1,8 +1,16 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ToggleMode from "./ToggleMode";
 
 const MainNav = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-2">
@@ -12,7 +20,7 @@ const MainNav = () => {
       </div>
       <div className="flex items-center gap-2">
         <Link href="/">Logout</Link>
-        <ToggleMode />
+        {isClient && <ToggleMode />}
       </div>
     </div>
   );
