@@ -4,13 +4,14 @@ import DataTable from "./DataTable";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import Pagination from "@/components/Pagination";
+import StatusFilter from "@/components/StatusFilter";
 
 interface SearchParams {
   page: string;
 }
 
 const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const pageSize = 5;
+  const pageSize = 10;
   const page = parseInt(searchParams.page) || 1;
   const ticketCount = await prisma.ticket.count();
 
@@ -21,12 +22,15 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
 
   return (
     <div>
-      <Link
-        href="/tickets/new"
-        className={buttonVariants({ variant: "default" })}
-      >
-        New Ticket
-      </Link>
+      <div className="flex gap-2">
+        <Link
+          href="/tickets/new"
+          className={buttonVariants({ variant: "default" })}
+        >
+          New Ticket
+        </Link>
+        <StatusFilter />
+      </div>
       <DataTable tickets={tickets} />
       <Pagination
         itemCount={ticketCount}
