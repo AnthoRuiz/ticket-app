@@ -8,7 +8,6 @@ const Users = async () => {
 
   return (
     <div>
-      P
       <UserForm />
       <DataTable users={users} />
     </div>
